@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/CategoryChart.tsx","./src/components/ConfirmDialog.tsx","./src/components/ExpenseForm.tsx","./src/components/ExpenseTable.tsx","./src/components/SummaryCards.tsx","./src/hooks/use-mobile.tsx","./src/hooks/useExpenses.ts"],"version":"5.9.3"}
