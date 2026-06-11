@@ -13,14 +13,14 @@ A full-stack expense tracking app built with **React + Vite** (frontend) and **N
 
 ## Tech Stack
 
-| Layer     | Technology                      | Why                                                            |
-|-----------|---------------------------------|----------------------------------------------------------------|
-| Frontend  | React 18 + Vite + TypeScript    | Fast dev server, simple SPA setup, type safety                 |
-| Styling   | Tailwind CSS v3                 | Utility-first, no extra CSS files needed                       |
-| Chart     | Recharts                        | Easy Pie/Bar charts with good React integration                |
-| Backend   | Node.js + Express               | Minimal setup, familiar REST API patterns                      |
-| Storage   | JSON file (`server/data/`)      | Simple persistence without a database dependency               |
-| IDs       | uuid v4                         | Unique IDs for each expense                                    |
+| Layer    | Technology                   | Why                                            |
+| -------- | ---------------------------- | ---------------------------------------------- |
+| Frontend | React 18 + Vite + TypeScript | Fast dev server, simple SPA setup, type safety |
+| Styling  | Tailwind CSS v3              | Utility-first, no extra CSS files needed       |
+| Chart    | Recharts                     | Easy Pie/Bar charts with good React integration |
+| Backend  | Node.js + Express            | Minimal setup, familiar REST API patterns      |
+| Storage  | JSON file (`server/data/`)   | Simple persistence without a database dependency |
+| IDs      | uuid v4                      | Unique IDs for each expense                    |
 
 ---
 
@@ -70,13 +70,15 @@ Base URL: `http://localhost:5000`
 Returns a list of expenses, sorted newest first.
 
 **Query params (all optional):**
-| Param      | Example          | Description                  |
-|------------|------------------|------------------------------|
-| `category` | `Food`           | Filter by category           |
-| `from`     | `2025-06-01`     | Filter from date (inclusive) |
-| `to`       | `2025-06-30`     | Filter to date (inclusive)   |
+
+| Param      | Example      | Description                  |
+| ---------- | ------------ | ---------------------------- |
+| `category` | `Food`       | Filter by category           |
+| `from`     | `2025-06-01` | Filter from date (inclusive) |
+| `to`       | `2025-06-30` | Filter to date (inclusive)   |
 
 **Response `200`:**
+
 ```json
 [
   {
@@ -97,6 +99,7 @@ Returns a list of expenses, sorted newest first.
 Returns aggregated summary data for the current month.
 
 **Response `200`:**
+
 ```json
 {
   "totalThisMonth": 4500.00,
@@ -115,7 +118,7 @@ Returns aggregated summary data for the current month.
 
 Returns a single expense by ID.
 
-**Response `200`:** Expense object  
+**Response `200`:** Expense object
 **Response `404`:** `{ "error": "Expense not found" }`
 
 ---
@@ -125,6 +128,7 @@ Returns a single expense by ID.
 Creates a new expense.
 
 **Request body:**
+
 ```json
 {
   "amount": 250,
@@ -135,12 +139,13 @@ Creates a new expense.
 ```
 
 **Validation rules:**
+
 - `amount` — required, positive number
 - `category` — required, one of: Food, Transport, Bills, Entertainment, Other
 - `date` — required, cannot be a future date
 - `note` — optional
 
-**Response `201`:** Created expense object  
+**Response `201`:** Created expense object
 **Response `400`:** `{ "errors": { "amount": "...", "category": "..." } }`
 
 ---
@@ -149,7 +154,7 @@ Creates a new expense.
 
 Updates an existing expense. Same request body and validation as POST.
 
-**Response `200`:** Updated expense object  
+**Response `200`:** Updated expense object
 **Response `404`:** `{ "error": "Expense not found" }`
 
 ---
@@ -158,7 +163,7 @@ Updates an existing expense. Same request body and validation as POST.
 
 Deletes an expense.
 
-**Response `204`:** No content  
+**Response `204`:** No content
 **Response `404`:** `{ "error": "Expense not found" }`
 
 ---
@@ -172,35 +177,39 @@ Health check endpoint.
 ---
 
 ## Project Structure
+
+```
 expense-tracker/
-├── client/                   # React frontend
+│
+├── client/                         # React frontend (Vite + TypeScript)
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── CategoryChart.tsx   # Recharts pie chart
+│   │   │   ├── CategoryChart.tsx   # Recharts pie chart (spending by category)
 │   │   │   ├── ConfirmDialog.tsx   # Delete confirmation modal
-│   │   │   ├── ExpenseForm.tsx     # Add / Edit modal form
+│   │   │   ├── ExpenseForm.tsx     # Add / Edit expense modal form
 │   │   │   ├── ExpenseTable.tsx    # Expenses list with edit/delete + CSV export
-│   │   │   └── SummaryCards.tsx    # Summary cards + category totals table
+│   │   │   └── SummaryCards.tsx    # Stat cards + category totals table
 │   │   ├── hooks/
-│   │   │   └── useExpenses.ts      # All API calls + state management
-│   │   ├── App.tsx                 # Main page — layout + filters
+│   │   │   └── useExpenses.ts      # All API calls + shared state
+│   │   ├── App.tsx                 # Root component — layout, filters, state
 │   │   ├── main.tsx                # React entry point
 │   │   └── index.css               # Tailwind base styles
 │   ├── index.html
-│   ├── vite.config.ts              # Vite config with /api proxy
+│   ├── vite.config.ts              # Vite config — proxies /api to localhost:5000
 │   ├── tailwind.config.js
 │   └── package.json
 │
-├── server/                   # Express backend
+├── server/                         # Node.js + Express backend
 │   ├── src/
-│   │   └── index.js               # All routes + business logic
+│   │   └── index.js                # All API routes + business logic
 │   ├── data/
-│   │   └── expenses.json          # Auto-created, persists data
+│   │   └── expenses.json           # Auto-created on first run, persists data
 │   └── package.json
 │
 ├── .gitignore
-├── package.json               # Root scripts for convenience
+├── package.json                    # Root convenience scripts
 └── README.md
+```
 
 ---
 
@@ -210,17 +219,17 @@ expense-tracker/
 
 1. Push code to GitHub
 2. Go to [render.com](https://render.com) → New Web Service
-3. Connect your repo, set **Root Directory** to `server`
+3. Connect your repo → set **Root Directory** to `server`
 4. Build command: `npm install`
 5. Start command: `npm start`
-6. Copy the Render URL
+6. Copy the deployed URL (e.g. `https://expense-tracker-api-dfe5.onrender.com`)
 
 ### Frontend → Vercel (free)
 
 1. Go to [vercel.com](https://vercel.com) → Add New Project → Import from GitHub
 2. Set **Root Directory** to `client`
 3. Framework Preset: `Vite`
-4. Add environment variable: `VITE_API_URL` = your Render URL
+4. Add environment variable: `VITE_API_URL` = your Render backend URL
 5. Deploy!
 
 ---
@@ -230,16 +239,18 @@ expense-tracker/
 - ✅ Add / Edit / Delete expenses with validation
 - ✅ Filter by category and date range (This Month, Last Month, Custom, All Time)
 - ✅ Summary cards — total this month, top category, highest expense
-- ✅ Category-wise totals table (this month)
+- ✅ Category-wise totals table (current month)
 - ✅ Pie chart of spending by category (current month)
-- ✅ CSV export of visible expenses
+- ✅ CSV export of visible/filtered expenses
 - ✅ Loading and error states
 - ✅ Empty state UI
 - ✅ Data persists to JSON file across server restarts
 - ✅ INR currency formatting (₹)
-- ✅ Form validation (no negative amounts, no future dates)
+- ✅ Form validation (no negative amounts, no future dates, category required)
 - ✅ Delete confirmation dialog
 - ✅ Responsive on mobile
+
+---
 
 ## Next Steps
 
@@ -249,4 +260,4 @@ With more time, I would add:
 - **Search by note** — quick text search across expense notes
 - **Authentication** — multi-user support with JWT
 - **PostgreSQL / SQLite** — replace the JSON file with a proper database
-- **Tests** — Jest tests for the API endpoints (at minimum: POST validation, summary calculation)
+- **Tests** — Jest tests for the API endpoints (POST validation, summary calculation)
