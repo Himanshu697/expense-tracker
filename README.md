@@ -7,7 +7,7 @@ A full-stack expense tracking app built with **React + Vite** (frontend) and **N
 ## Live Demo
 
 - **Frontend:** https://expense-tracker-sigma-orcin.vercel.app
-- **Backend:**  https://expense-tracker-api-dfe5.onrender.com
+- **Backend:** https://expense-tracker-api-dfe5.onrender.com
 
 ---
 
@@ -31,7 +31,7 @@ A full-stack expense tracking app built with **React + Vite** (frontend) and **N
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/expense-tracker.git
+git clone https://github.com/Himanshu697/expense-tracker.git
 cd expense-tracker
 ```
 
@@ -70,9 +70,9 @@ Base URL: `http://localhost:5000`
 Returns a list of expenses, sorted newest first.
 
 **Query params (all optional):**
-| Param      | Example          | Description              |
-|------------|------------------|--------------------------|
-| `category` | `Food`           | Filter by category       |
+| Param      | Example          | Description                  |
+|------------|------------------|------------------------------|
+| `category` | `Food`           | Filter by category           |
 | `from`     | `2025-06-01`     | Filter from date (inclusive) |
 | `to`       | `2025-06-30`     | Filter to date (inclusive)   |
 
@@ -172,8 +172,6 @@ Health check endpoint.
 ---
 
 ## Project Structure
-
-```
 expense-tracker/
 ├── client/                   # React frontend
 │   ├── src/
@@ -181,8 +179,8 @@ expense-tracker/
 │   │   │   ├── CategoryChart.tsx   # Recharts pie chart
 │   │   │   ├── ConfirmDialog.tsx   # Delete confirmation modal
 │   │   │   ├── ExpenseForm.tsx     # Add / Edit modal form
-│   │   │   ├── ExpenseTable.tsx    # Expenses list with edit/delete
-│   │   │   └── SummaryCards.tsx    # 3 stat cards at the top
+│   │   │   ├── ExpenseTable.tsx    # Expenses list with edit/delete + CSV export
+│   │   │   └── SummaryCards.tsx    # Summary cards + category totals table
 │   │   ├── hooks/
 │   │   │   └── useExpenses.ts      # All API calls + state management
 │   │   ├── App.tsx                 # Main page — layout + filters
@@ -203,7 +201,6 @@ expense-tracker/
 ├── .gitignore
 ├── package.json               # Root scripts for convenience
 └── README.md
-```
 
 ---
 
@@ -216,16 +213,15 @@ expense-tracker/
 3. Connect your repo, set **Root Directory** to `server`
 4. Build command: `npm install`
 5. Start command: `npm start`
-6. Copy the Render URL (e.g. `https://expense-tracker-api.onrender.com`)
+6. Copy the Render URL
 
-### Frontend → Netlify (free)
+### Frontend → Vercel (free)
 
-1. Go to [netlify.com](https://netlify.com) → Add new site → Import from GitHub
-2. Set **Base directory** to `client`
-3. Build command: `npm run build`
-4. Publish directory: `dist`
-5. Add environment variable: `VITE_API_URL` = your Render URL
-6. Deploy!
+1. Go to [vercel.com](https://vercel.com) → Add New Project → Import from GitHub
+2. Set **Root Directory** to `client`
+3. Framework Preset: `Vite`
+4. Add environment variable: `VITE_API_URL` = your Render URL
+5. Deploy!
 
 ---
 
@@ -234,7 +230,9 @@ expense-tracker/
 - ✅ Add / Edit / Delete expenses with validation
 - ✅ Filter by category and date range (This Month, Last Month, Custom, All Time)
 - ✅ Summary cards — total this month, top category, highest expense
+- ✅ Category-wise totals table (this month)
 - ✅ Pie chart of spending by category (current month)
+- ✅ CSV export of visible expenses
 - ✅ Loading and error states
 - ✅ Empty state UI
 - ✅ Data persists to JSON file across server restarts
@@ -247,7 +245,6 @@ expense-tracker/
 
 With more time, I would add:
 
-- **CSV export** — download filtered expenses as a spreadsheet
 - **Budget per category** — set a monthly limit and show a progress bar when nearing it
 - **Search by note** — quick text search across expense notes
 - **Authentication** — multi-user support with JWT
