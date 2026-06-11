@@ -6,8 +6,8 @@ A full-stack expense tracking app built with **React + Vite** (frontend) and **N
 
 ## Live Demo
 
-- **Frontend:** _Add Netlify/Vercel URL here after deployment_
-- **Backend:** _Add Render/Railway URL here after deployment_
+- **Frontend:** https://expense-tracker-sigma-orcin.vercel.app
+- **Backend:**  https://expense-tracker-api-dfe5.onrender.com
 
 ---
 
